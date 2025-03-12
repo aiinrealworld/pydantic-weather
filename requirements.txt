@@ -1,0 +1,15 @@
+httpx==0.28.1
+logfire==3.4.0
+pydantic_ai==0.0.21
+python-dotenv==1.0.1
+devtools==0.12.2
+aiohttp==3.11.11
+streamlit==1.42.0
+gTTS==2.3.2
+SpeechRecognition==3.11.0
+openai-whisper==20240930
+pyaudio==0.2.14
+torch==2.4.1
+soundfile==0.13.1
+pydub==0.25.1
+pyttsx3==2.98

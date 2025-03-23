@@ -7,7 +7,6 @@ from weather_agent import Deps, weather_agent  # Assuming your weather_agent is 
 import speech_recognition as sr  # For Speech Recognition
 from gtts import gTTS  # For Text-to-Speech
 import io  # For handling audio data
-from typing import List
 import base64
 import time
 
@@ -134,10 +133,3 @@ for message in st.session_state.messages:
         st.markdown(f'<div style="padding: 10px; border-radius: 5px; background-color: #E6F3FF;"><strong>You:</strong> {content}</div>', unsafe_allow_html=True)
     else:
         st.markdown(f'<div style="padding: 10px; border-radius: 5px; background-color: #F0F2F6;"><strong>Assistant:</strong> {content}</div>', unsafe_allow_html=True)
-
-# Clear Chat Button
-if st.button("Clear Chat"):
-    st.session_state.messages = []
-    st.session_state.agent_message_history = []
-    st.session_state.user_input = ""
-    st.rerun()

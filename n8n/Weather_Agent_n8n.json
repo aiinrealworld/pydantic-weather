@@ -1,0 +1,189 @@
+{
+  "name": "Weather_Agent_n8n",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        220,
+        220
+      ],
+      "id": "e4910658-d8a1-40d3-9fba-e2609310d118",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get the latitude and longitude of a location.\n\nparams:\n        q: A description of a location.",
+        "url": "https://geocode.maps.co/search",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "q"
+            },
+            {
+              "name": "api_key",
+              "valueProvider": "fieldValue",
+              "value": "679cd9cc899a1004401592ahja02da0"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        380,
+        220
+      ],
+      "id": "48d12629-08c3-4bf9-97db-49557e2e4158",
+      "name": "get_lat_lng"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get the weather at a location. temperature attribute in response has the correct temperature\n\nparams-\n        'location': latitude, longitude\n",
+        "url": "https://api.tomorrow.io/v4/weather/realtime",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "location"
+            },
+            {
+              "name": "units",
+              "valueProvider": "fieldValue",
+              "value": "metric"
+            },
+            {
+              "name": "apikey",
+              "valueProvider": "fieldValue",
+              "value": "YuBUbTmT630WMVJGiUs2gkGOAfEYrdPz"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        580,
+        220
+      ],
+      "id": "57887287-f548-45f3-bdbb-00bb238e1998",
+      "name": "get_weather"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        60,
+        220
+      ],
+      "id": "461ed294-1308-429f-9a89-81e27dd8c290",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "8HX3WU8Ofsp6Eh4m",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        220,
+        0
+      ],
+      "id": "778b66a7-511b-4363-99fa-50f35b69f34a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "02ea6aba-d058-4b39-ab21-94fcca57a1d3",
+      "name": "When chat message received",
+      "webhookId": "f0e7674a-cc6d-4940-adbd-1f6f03b01097"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_lat_lng": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_weather": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e5c6e8aa-51f1-40ba-a6b0-ead6d04b3675",
+  "meta": {
+    "instanceId": "7211d6b045193b5a4f92e62e503797fac7f537a07832f2d7a2ed2f0ac89a1ef3"
+  },
+  "id": "feopMEnybXGMXWJp",
+  "tags": []
+}

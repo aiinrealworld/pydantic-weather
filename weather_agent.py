@@ -3,19 +3,15 @@ from __future__ import annotations as _annotations
 import asyncio
 import os
 from dataclasses import dataclass
-from typing import Any, List
+from typing import Any, List, TypedDict
 
 import logfire
-from devtools import debug
 from httpx import AsyncClient
 
 from pydantic_ai import Agent, ModelRetry, RunContext
 from pydantic_ai.messages import ModelMessage
 
 from dotenv import load_dotenv
-import aiohttp
-from typing import TypedDict, Literal
-
 
 load_dotenv()
 

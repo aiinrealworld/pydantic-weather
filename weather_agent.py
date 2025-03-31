@@ -26,7 +26,6 @@ class Deps:
     weather_api_key: str | None
     geo_api_key: str | None
 
-
 weather_agent = Agent(
     'openai:gpt-4o',
     # 'Be concise, reply with one sentence.' is enough for some models (like openai) to use
@@ -36,6 +35,7 @@ weather_agent = Agent(
     ),
     deps_type=Deps,
     retries=2,
+    instrument=True
 )
 
 

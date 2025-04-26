@@ -28,7 +28,7 @@ def recognize_speech():
         st.info("Say something!")  # Use st.info for messages
         audio = r.listen(source, timeout=5)  # Listen with a timeout
         try:
-            text = r.recognize_google(audio)  # Use Google Web Speech API (requires internet)
+            text = r.recognize_google(audio)
             st.success(f"You said: {text}")
             return text
         except sr.UnknownValueError:
@@ -130,6 +130,6 @@ for message in st.session_state.messages:
     role = message["role"]
     content = message["content"]
     if role == "user":
-        st.markdown(f'<div style="padding: 10px; border-radius: 5px; background-color: #E6F3FF;"><strong>You:</strong> {content}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="padding: 10px; border-radius: 5px; background-color: #D0E8FF; color: #000000;"><strong>You:</strong> {content}</div>', unsafe_allow_html=True)
     else:
-        st.markdown(f'<div style="padding: 10px; border-radius: 5px; background-color: #F0F2F6;"><strong>Assistant:</strong> {content}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="padding: 10px; border-radius: 5px; background-color: #D8D8D8; color: #000000;"><strong>Assistant:</strong> {content}</div>', unsafe_allow_html=True)

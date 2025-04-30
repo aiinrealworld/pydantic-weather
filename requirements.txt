@@ -7,3 +7,4 @@ streamlit==1.42.0
 gTTS==2.3.2
 SpeechRecognition==3.11.0
 pyaudio==0.2.14
+standard-aifc==3.13.0
